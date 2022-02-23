@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void fillArray(int n, int *array);
+int* fillArray(int n);
 void showArray(int n, int *array);
 int getMaxEvenIter(int n, int *array);
 int* insertElement(int n, int target, int *array);
@@ -13,10 +13,12 @@ int main()
     int n;
     cout << "Enter array size: ";
     cin >> n;
-    int *arr = new int[n];
 
-    cout << "Fill array with " << n << " elements: ";
-    fillArray(n, arr);
+    int *arr = fillArray(n);
+    if(arr == nullptr){
+        cout << "Array cannot be size of 0" << endl;
+        return 0;
+    }
     cout << "Array filled up. Here it is: ";
     showArray(n, arr);
 
@@ -37,10 +39,14 @@ int main()
     return 0;
 }
 
-void fillArray(int n, int *array){
+int* fillArray(int n){
+    if(n == 0) { return nullptr; }
+    cout << "Fill array with " << n << " elements: ";
+    int* array = new int[n];
     for(int i = 0; i < n; i++){
         cin >> array[i];
     }
+    return array;
 }
 
 void showArray(int n, int *array){
