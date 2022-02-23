@@ -6,7 +6,7 @@ void fillArray(int n, int* array);
 void showArray(int n, int* array);
 int getMaxEvenIter(int n, int* array);
 void insertElement(int n, int target, int* array);
-void deleteElement(int n, int target, int* array);
+bool deleteElement(int n, int target, int* array);
 
 int main()
 {
@@ -28,13 +28,15 @@ int main()
 
     cout << "Enter new element: ";
     insertElement(n, max_even_iter + 1, arr);
+    n++;
 
     cout << "The new array looks like: ";
-    showArray(n+1, arr);
+    showArray(n, arr);
 
     cout << "Deleting one element...\n";
-    deleteElement(n+1, max_even_iter - 1, arr);
-    
+    bool status = deleteElement(n, max_even_iter - 1, arr);
+    n += status ? -1 : 0;
+
     cout << "The final array looks like: ";
     showArray(n, arr);
     return 0;
@@ -61,6 +63,7 @@ int getMaxEvenIter(int n, int* array){
         if(array[i] % 2 == 0){
             if(array[i] > max){
                 maxIter = i;
+                max = array[i];
             }
         }
     }
@@ -72,14 +75,13 @@ void insertElement(int n, int target, int* array){
         array[i] = array[i-1];
     }
     cin >> array[target];
-    for(int i = 0; i < n+1; i++){
-        cout << array[i] << endl;
-    }
 }
 
-void deleteElement(int n, int target, int* array){
+bool deleteElement(int n, int target, int* array){
+    if(target == -1) { return false; }
     for(int i = target; i < n+1; i++){
         array[i] = array[i+1];
     }
+    return true;
 }
 
