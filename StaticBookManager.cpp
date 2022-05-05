@@ -2,7 +2,7 @@
 using namespace std;
 
 class StaticBookManager{
-    protected:
+    private:
         Book books[1024];
         void deleteElement(int target){
             for(int i = target; i < this->length+1; i++){
